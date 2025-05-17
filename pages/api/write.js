@@ -22,7 +22,7 @@ export default async function handler(req, res) {
   try {
     await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: 'Data Afiliasi!A:F',
+      range: 'Data Afiliasi!A1:F1',
       valueInputOption: 'USER_ENTERED',
       requestBody: {
         values: [[nama, no_wa, link_afiliasi, waktu_kirim || '', status || '', komisi || '']],

@@ -16,17 +16,19 @@ export default async function handler(req, res) {
 
   const spreadsheetId = process.env.SHEET_ID || '15HUV51VCF9N277mm73JNFDMwiF1CX2jgG8gS1ZGV4rc';
 
-  const { nama, email } = req.body;
+  // Ambil data dari body request (sesuaikan dengan nama variabel yg dikirim)
+  const { nama, no_wa, link_afiliasi, waktu_kirim, status, komisi } = req.body;
 
   try {
     await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: 'Data Afiliasi!A1:F1',
+      range: 'Data Afiliasi!A:F',
       valueInputOption: 'USER_ENTERED',
       requestBody: {
-        values: [[name, username, link, whatsapp, address, commission]],
+        values: [[nama, no_wa, link_afiliasi, waktu_kirim || '', status || '', komisi || '']],
       },
     });
+
     res.status(200).json({ success: true, message: 'Data berhasil ditambahkan' });
   } catch (err) {
     res.status(500).json({ error: err.message });
